@@ -1,4 +1,6 @@
 {
-    "vscode.tsc.compiler.alertTSConfigChanges": "never",
-    "vscode.tsc.compiler.alertOnError": "never"
+  "vscode.tsc.compiler.alertTSConfigChanges": "never",
+  "vscode.tsc.compiler.alertOnError": "never",
+  "easycode.userEmail": "luctunechi45@gmail.com",
+  "easycode.openAI ApiKey": "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"
 }
