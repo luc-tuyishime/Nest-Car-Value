@@ -1,4 +1,5 @@
 // Entity is like Model
+import { Report } from 'src/reports/report.entity';
 import {
   AfterInsert,
   AfterRemove,
@@ -6,6 +7,7 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -18,6 +20,10 @@ export class User {
 
   @Column()
   password: string;
+
+  // will be associated with type of Report class
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[];
 
   @AfterInsert()
   logInsert() {
