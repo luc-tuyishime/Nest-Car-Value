@@ -21,6 +21,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column({ default: true })
+  admin: boolean;
+
   // will be associated with type of Report class
   @OneToMany(() => Report, (report) => report.user)
   reports: Report[];

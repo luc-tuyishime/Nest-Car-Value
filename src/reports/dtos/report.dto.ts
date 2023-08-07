@@ -1,4 +1,3 @@
-import { User } from '../../users/user.entity';
 import { Expose, Transform } from 'class-transformer';
 
 export class ReportDto {
@@ -18,6 +17,8 @@ export class ReportDto {
   lat: number;
   @Expose()
   mileage: number;
+  @Expose()
+  approved: boolean;
 
   @Transform(({ obj }) => obj.user.id)
   @Expose()
