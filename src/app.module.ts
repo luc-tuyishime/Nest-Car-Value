@@ -22,10 +22,15 @@ const cookieSession = require('cookie-session');
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         return {
-          type: 'sqlite',
+          type: configService.get<any>('DB_TYPE'),
+          host: configService.get<string>('DB_LOCALHOST'),
+          port: configService.get<number>('DB_PORT'),
+          password: configService.get<string>('DB_PASSWORD'),
+          username: configService.get<string>('DB_USERNAME'),
           database: configService.get<string>('DB_NAME'),
           entities: [User, Report],
           synchronize: true,
+          logging: true,
         };
       },
     }),
@@ -47,12 +52,13 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(private ConfigService: ConfigService) {}
   // THIS WILL BE CALLED AUTOMATICALLY WHENEVER THE APP START LISTENING FOR INCOMING TRAFFIC
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: ['asdasdasdsa'],
+          keys: [this.ConfigService.get('COOKIE_KEY')], // used to encrypt our cookie
         }),
       )
       .forRoutes('*'); // USE THE cookieSession middleware ON EVERY ROUTE
